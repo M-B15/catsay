@@ -101,7 +101,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "catsay"
+name = "cat_say"
 version = "0.1.0"
 dependencies = [
  "anyhow",
