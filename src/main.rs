@@ -1,3 +1,4 @@
+use std::io::{self, Read};
 use anyhow::{Context, Result};
 use colored::Colorize;
 use clap::Parser;
@@ -15,14 +16,25 @@ struct Options {
 
     #[clap(short = 'f', long = "file")]
     /// Load the cat picture from the specified file
-    catfile: Option<std::path::PathBuf>,
+    catfile: Option<std::path::PathBuf>, // [3]
+    
+    #[clap(short = 'i', long = "stdin")]
+    /// Read the message from STDIN instead of the argument
+    stdin: bool, // [4]
+
 }
 
 fn main() -> Result<()> {
-    let options = Options::parse(); //[2]
-    let message = options.message;
+    let options = Options::parse();
+    let mut message = String::new();
     
     let eye = if options.sleeping { "-" } else { "o" }; //[1]
+
+    if options.stdin {
+        io::stdin().read_to_string(&mut message)?;
+    } else {
+        message = options.message;
+    }
 
     if message.to_lowercase() == "woof" {
         eprintln!("A cat shouldn't bark like a dog."); 
