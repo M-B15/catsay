@@ -1,9 +1,10 @@
 [package]
 name = "cat_say"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 description = "A catsay cli tool"
+homepage = "https://crates.io/crates/cat_say"
 
 [dependencies]
 anyhow = "1.0.95"
